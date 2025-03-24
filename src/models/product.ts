@@ -7,6 +7,16 @@ export class Product {
     private stock: number
   ) {}
 
+  // Método para obtener el ID del producto
+  getId(): number {
+    return this.id;
+  }
+
+  // Método para obtener el nombre del producto
+  getName(): string {
+    return this.name;
+  }
+
   // Método para mostrar información del producto
   showInfo(): void {
     console.log(
