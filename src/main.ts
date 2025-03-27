@@ -1,6 +1,7 @@
 import { Product } from "./models/product";
 import { ProductManagement } from "./services/product-management";
 import { User } from "./models/user";
+import { UserManagement } from "./services/user-management";
 
 // Creamos algunas instancias de la clase Product
 const product1 = new Product(1, "Keyboard", "Standard QWERTY keyboard", 20, 50);
@@ -17,6 +18,9 @@ const user2 = new User(2, "Stalin", "stalin@mail.com", "user");
 
 // Creamos una instancia de la clase ProductManagement
 const inventory = new ProductManagement();
+
+// Creamos una instancia de la clase UserManagement
+const users = new UserManagement();
 
 // Agregamos los productos al inventario
 inventory.addProduct(product1);
@@ -54,4 +58,36 @@ inventory.updateProduct(updatedProduct);
 inventory.showProducts();
 
 user1.showInfo();
-console.log(user2.getName());
+console.log("Nombre del usurio II:", user2.getName());
+
+// Agregando usuarios
+users.addUser(user1);
+users.addUser(user2);
+users.showUsers();
+
+// Buscando user por su ID
+console.log(`\n Buscando Usuario por su Id:`);
+try {
+  const userFinded = users.findUserById(3);
+  console.log(`User with ID: ${userFinded.getId()} found.`);
+} catch (error) {
+  if (error instanceof Error) {
+    console.log(`Error: ${error.message}`);
+  } else {
+    console.log(" An unknown error ocurred");
+  }
+}
+
+// Eliminando un User by ID
+console.log("\n Deleting user by id");
+try {
+  const deletedUser = users.deleteUserById(2);
+} catch (error) {
+  if (error instanceof Error) {
+    console.error(error.message);
+  } else {
+    console.log("An unknown error ocurred");
+  }
+}
+
+users.showUsers();
