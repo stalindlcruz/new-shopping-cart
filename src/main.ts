@@ -3,6 +3,7 @@ import { ProductManagement } from "./services/product-management";
 import { User } from "./models/user";
 import { UserManagement } from "./services/user-management";
 import { Invoice } from "./models/invoice";
+import { InvoiceManagement } from "./services/invoice-management";
 
 // Creamos algunas instancias de la clase Product
 const product1 = new Product(1, "Keyboard", "Standard QWERTY keyboard", 20, 50);
@@ -15,6 +16,10 @@ const user2 = new User(2, "Stalin", "stalin@mail.com", "user");
 
 // Creamos una instancia de la clase Invoice
 const invoice = new Invoice(user1, [product1, product2], 30);
+const invoice2 = new Invoice(user2, [product3], 200);
+
+// Creamos una instancia de la clase InvoiceManagement
+const invoiceManagement = new InvoiceManagement();
 
 // product1.showInfo();
 // product2.showInfo();
@@ -97,4 +102,9 @@ try {
 users.showUsers();
 
 // Mostrando la factura
-console.log('\n Mostrando la factuira', '\n' + invoice.showInvoice());
+// console.log("\n Mostrando la factuira", "\n" + invoice.showInvoice());
+
+// Agregando la factura al sistema
+invoiceManagement.addInvoice(invoice);
+invoiceManagement.addInvoice(invoice2);
+invoiceManagement.showInvoices();
