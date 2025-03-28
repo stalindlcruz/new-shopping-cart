@@ -4,6 +4,7 @@ import { User } from "./models/user";
 import { UserManagement } from "./services/user-management";
 import { Invoice } from "./models/invoice";
 import { InvoiceManagement } from "./services/invoice-management";
+import { ShoppingCart } from "./services/shopping-cart";
 
 // Creamos algunas instancias de la clase Product
 const product1 = new Product(1, "Keyboard", "Standard QWERTY keyboard", 20, 50);
@@ -30,6 +31,9 @@ const inventory = new ProductManagement();
 
 // Creamos una instancia de la clase UserManagement
 const users = new UserManagement();
+
+// Creamos una instancia de la clase ShoppingCart
+const shoppingCart = new ShoppingCart(user1);
 
 // Agregamos los productos al inventario
 inventory.addProduct(product1);
@@ -108,3 +112,24 @@ users.showUsers();
 invoiceManagement.addInvoice(invoice);
 invoiceManagement.addInvoice(invoice2);
 invoiceManagement.showInvoices();
+
+// Agregando productos al carrito de compras
+shoppingCart.addProduct(product1);
+shoppingCart.addProduct(product2);
+shoppingCart.addProduct(product3);
+
+// Eliminando un producto del carrito de compras
+shoppingCart.removeProductById(1);
+// shoppingCart.removeProductById(2);
+
+// Mostrando los productos del carrito de compras
+shoppingCart.showProducts();
+
+// Obteniendo el total del carrito de compras
+console.log(`Total: $${shoppingCart.getTotal()}`);
+
+// Mostar los productos del carrito de compras
+shoppingCart.showProducts();
+
+// Pagar y generar factura
+shoppingCart.pay();

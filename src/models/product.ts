@@ -17,6 +17,11 @@ export class Product {
     return this.name;
   }
 
+  // Método para obtener el precio del producto
+  getPrice(): number {
+    return this.price;
+  }
+
   // Método para mostrar información del producto
   showInfo(): void {
     console.log(
