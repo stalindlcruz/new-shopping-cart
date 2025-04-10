@@ -2,14 +2,14 @@ import { Product } from "./product";
 import { User } from "./user";
 
 export class Invoice {
-  private static idCounter = 1;
-  private id: number = Invoice.idCounter++;
-  private date: Date = new Date();
+  public static idCounter = 1;
+  public id: number = Invoice.idCounter++;
+  public date: Date = new Date();
 
   constructor(
-    private user: User,
-    private products: Product[],
-    private total: number
+    public user: User,
+    public products: Product[],
+    public total: number
   ) {}
 
   // Metodo para obtener el ID de la factura
@@ -30,7 +30,7 @@ export class Invoice {
         Date: ${this.getDate()}
         User: ${this.user.getName()}
         Total: ${this.total}
-        Products: ${this.products.map((product) => product.getName())}
+        Products: ${this.products.map((product) => product.name)}
         \n Thanks for shopping with us!`;
   }
 }

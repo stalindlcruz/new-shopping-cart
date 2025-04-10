@@ -13,7 +13,14 @@ export class InvoiceManagement {
       return;
     }
     this.invoices.forEach((invoice) => {
-      console.log(invoice.showInvoice());
+      console.log(`
+    **Invoice**
+    ID: ${invoice.id}
+    Date: ${invoice.getDate()}
+    User: ${invoice.user.getName()}
+    Total: ${invoice.total}
+    Products: ${invoice.products.map((product) => product.name)}
+    \n Thanks for shopping with us!`);
     });
   }
 }

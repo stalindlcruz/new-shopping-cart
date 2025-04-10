@@ -13,12 +13,12 @@ export class ShoppingCart {
   // Método para agregar un producto al carrito de compras
   public addProduct(product: Product): void {
     this.items.push(product);
-    console.log(`Product ${product.getName()} added to the shopping cart`);
+    console.log(`Product ${product.name} added to the shopping cart`);
   }
 
   // Metodo para eliminar un producto del carrito de compras
   public removeProductById(id: number): void {
-    const index = this.items.findIndex((item) => item.getId() === id);
+    const index = this.items.findIndex((item) => item.id === id);
     if (index < 0) {
       throw new Error("Product not found");
     }
@@ -27,7 +27,7 @@ export class ShoppingCart {
     shopping cart`);
   }
 
-  // Metodo para listar los productos del carrito de compras
+  // Metodo para listar los productos del carrito de compra
   public showProducts(): void {
     if (this.items.length === 0) {
       console.log("The shopping cart is empty");
@@ -35,13 +35,16 @@ export class ShoppingCart {
     }
     console.log("The shopping cart contains the following products:");
     this.items.forEach((item) => {
-      item.showInfo();
+      console.log(`ID: ${item.id} - Name: ${item.name}`);
     });
+    // this.allProductos.forEach((item) => {
+    //   item.showProducts();
+    // });
   }
 
   // Metodo para obtener el total de los productos en el carrito de compras
   public getTotal(): number {
-    return this.items.reduce((total, item) => total + item.getPrice(), 0);
+    return this.items.reduce((total, item) => total + item.price, 0);
   }
 
   // Metodo para pagar y generar la factura

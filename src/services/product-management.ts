@@ -3,56 +3,67 @@ import { Product } from "../models/product";
 export class ProductManagement {
   private products: Product[] = [];
 
-  // Método para agregar un producto al arreglo de productos
   addProduct(product: Product): void {
     const productExists = this.products.some(
-      (p) => p.getId() === product.getId()
+      (producto) => producto.id === product.id
     );
     if (productExists) {
-      throw new Error(`Product with ID ${product.getId()} already exists`);
-    }
-    this.products.push(product);
-    console.log(`Product with ID ${product.getId()} added successfully`);
-  }
-
-  // Método para listar los productos
-  showProducts(): void {
-    if (this.products.length === 0) {
-      console.log("No products to show");
+      this.managerMessage(`Product with ID ${product.id} already exists`);
       return;
     }
-    console.log("List of products:");
-    this.products.forEach((product) => product.showInfo());
+    this.products.push(product);
+    this.managerMessage(`Product with ID ${product.id} added successfully`);
   }
 
-  // Método para buscar un producto por ID
+  showProducts(): void {
+    // const allProducts = this.products;
+    // if (this.products.length === 0) {
+    //   console.log("No products to show");
+    //   return;
+    // }
+    // console.log(`\n List of products`);
+    // allProducts.forEach((producto) => {
+    //   console.log(`ID: ${producto.id} - Name: ${producto.name}`);
+    // });
+
+    const productLists: Array<Product> | string =
+      this.products.length === 0 ? "No Products to show" : this.products;
+    console.log(productLists);
+
+    // this.products.forEach((product) => product.showInfo());
+  }
+
   findProductById(id: number): Product {
-    const product = this.products.find((p) => p.getId() === id);
+    const product = this.products.find((producto) => producto.id === id);
     if (!product) {
       throw new Error(`Product with ID ${id} not found`);
     }
     return product;
   }
 
-  // Método para eliminar un producto por ID
   removeProductById(id: number): void {
-    const productIndex = this.products.findIndex((p) => p.getId() === id);
-    if (productIndex === -1) {
-      throw new Error(`Product with ID ${id} not found`);
-    }
-    this.products.splice(productIndex, 1);
-    console.log(`Product with ID ${id} removed successfully`);
-  }
-
-  // Método para actualizar un producto
-  updateProduct(product: Product): void {
     const productIndex = this.products.findIndex(
-      (p) => p.getId() === product.getId()
+      (producto) => producto.id === id
     );
     if (productIndex === -1) {
-      throw new Error(`Product with ID ${product.getId()} not found`);
+      this.managerMessage(`Product with ID ${id} not found`);
+    }
+    this.products.splice(productIndex, 1);
+    this.managerMessage(`Product with ID ${id} removed successfully`);
+  }
+
+  updateProduct(product: Product): void {
+    const productIndex = this.products.findIndex(
+      (producto) => producto.id === producto.id
+    );
+    if (productIndex === -1) {
+      this.managerMessage(`Product with ID ${product.id} not found`);
     }
     this.products[productIndex] = product;
-    console.log(`Product with ID ${product.getId()} updated successfully`);
+    this.managerMessage(`Product with ID ${product.id} updated successfully`);
+  }
+
+  private managerMessage(msg: string): void {
+    console.log(msg);
   }
 }

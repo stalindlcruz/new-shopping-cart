@@ -6,52 +6,41 @@ import { Invoice } from "./models/invoice";
 import { InvoiceManagement } from "./services/invoice-management";
 import { ShoppingCart } from "./services/shopping-cart";
 
-// Creamos algunas instancias de la clase Product
 const product1 = new Product(1, "Keyboard", "Standard QWERTY keyboard", 20, 50);
 const product2 = new Product(2, "Mouse", "Wireless optical mouse", 10, 100);
 const product3 = new Product(3, "Monitor", "27-inch LED monitor", 200, 25);
 
-// Creamos algunas instancias de la clase User
-const user1 = new User(1, "Engels", "engels@mail.com", "admin");
-const user2 = new User(2, "Stalin", "stalin@mail.com", "user");
+const user1 = new User(1, "Engels", "engels@mail.com", 0);
+const user2 = new User(2, "Stalin", "stalin@mail.com", 1);
 
-// Creamos una instancia de la clase Invoice
 const invoice = new Invoice(user1, [product1, product2], 30);
 const invoice2 = new Invoice(user2, [product3], 200);
 
-// Creamos una instancia de la clase InvoiceManagement
 const invoiceManagement = new InvoiceManagement();
 
 // product1.showInfo();
 // product2.showInfo();
 // product3.showInfo();
 
-// Creamos una instancia de la clase ProductManagement
 const inventory = new ProductManagement();
 
-// Creamos una instancia de la clase UserManagement
 const users = new UserManagement();
 
-// Creamos una instancia de la clase ShoppingCart
 const shoppingCart = new ShoppingCart(user1);
 
-// Agregamos los productos al inventario
 inventory.addProduct(product1);
 inventory.addProduct(product2);
 inventory.addProduct(product3);
 
-// Mostramos los productos en el inventario
 inventory.showProducts();
 
-// Buscamos un producto por ID
 try {
   const product = inventory.findProductById(2);
-  console.log(`Product found: ${product.getName()}`);
+  console.log(`Product found: ${product.name}`);
 } catch (error) {
   console.log("Product not found");
 }
 
-// Eliminamos un producto por ID
 try {
   inventory.removeProductById(2);
   inventory.showProducts();
@@ -59,7 +48,6 @@ try {
   console.log("Product not found");
 }
 
-// Actualizamos un producto
 const updatedProduct = new Product(
   1,
   "Mechanical Keyboard",
@@ -73,12 +61,10 @@ inventory.showProducts();
 user1.showInfo();
 console.log("Nombre del usurio II:", user2.getName());
 
-// Agregando usuarios
 users.addUser(user1);
 users.addUser(user2);
 users.showUsers();
 
-// Buscando user por su ID
 console.log(`\n Buscando Usuario por su Id:`);
 try {
   const userFinded = users.findUserById(3);
@@ -91,7 +77,6 @@ try {
   }
 }
 
-// Eliminando un User by ID
 console.log("\n Deleting user by id");
 try {
   const deletedUser = users.deleteUserById(2);
@@ -105,31 +90,36 @@ try {
 
 users.showUsers();
 
-// Mostrando la factura
 // console.log("\n Mostrando la factuira", "\n" + invoice.showInvoice());
 
-// Agregando la factura al sistema
 invoiceManagement.addInvoice(invoice);
 invoiceManagement.addInvoice(invoice2);
 invoiceManagement.showInvoices();
 
-// Agregando productos al carrito de compras
 shoppingCart.addProduct(product1);
 shoppingCart.addProduct(product2);
 shoppingCart.addProduct(product3);
 
-// Eliminando un producto del carrito de compras
 shoppingCart.removeProductById(1);
 // shoppingCart.removeProductById(2);
 
-// Mostrando los productos del carrito de compras
 shoppingCart.showProducts();
 
-// Obteniendo el total del carrito de compras
 console.log(`Total: $${shoppingCart.getTotal()}`);
 
-// Mostar los productos del carrito de compras
 shoppingCart.showProducts();
 
-// Pagar y generar factura
-shoppingCart.pay();
+// shoppingCart.pay();
+
+// inventory.showProducts();
+
+// shoppingCart.showProducts();
+
+shoppingCart.addProduct(product1);
+shoppingCart.addProduct(product2);
+shoppingCart.addProduct(product3);
+shoppingCart.showProducts();
+
+inventory.updateProduct(product2);
+
+invoiceManagement.showInvoices()
